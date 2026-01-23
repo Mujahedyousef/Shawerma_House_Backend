@@ -32,6 +32,7 @@ import blogCategoryRoutes from './blogCategory.routes.js';
 import aboutUsRoutes from './aboutUs.routes.js';
 import careersPageRoutes from './careersPage.routes.js';
 import uploadRoutes from './upload.routes.js';
+import downloadAppSectionRoutes from './downloadAppSection.routes.js';
 
 const router = express.Router();
 
@@ -69,6 +70,7 @@ router.use('/blog-categories', blogCategoryRoutes);
 router.use('/about-us-page', aboutUsRoutes);
 router.use('/careers-page', careersPageRoutes);
 router.use('/upload', uploadRoutes);
+router.use('/download-app-section', downloadAppSectionRoutes);
 
 // Example route
 router.get('/', (req, res) => {
