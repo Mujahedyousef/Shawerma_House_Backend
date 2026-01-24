@@ -333,9 +333,9 @@ This document provides a detailed breakdown of all the data seeded by the `compr
 
 ## 👤 Admin User
 
-- **Email**: admin@baitalshawarma.com
+- **Email**: admin@central.com
 - **Username**: baitshawarma_admin
-- **Password**: shawarma@admin123
+- **Password**: central@admin123
 - **Role**: admin
 
 ---

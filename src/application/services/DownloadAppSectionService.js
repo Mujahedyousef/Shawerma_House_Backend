@@ -79,6 +79,29 @@ export class DownloadAppSectionService {
       [imageType]: imageUrl,
     });
   }
+
+  async deleteImage(id, imageType) {
+    const section = await this.downloadAppSectionRepository.findById(id);
+    if (!section) {
+      throw new Error('Download app section not found');
+    }
+
+    // Delete image file if exists
+    const imageUrl = section[imageType];
+    if (imageUrl && !imageUrl.startsWith('http')) {
+      try {
+        const imagePath = path.join(process.cwd(), 'public', imageUrl);
+        await fs.unlink(imagePath);
+      } catch (error) {
+        console.error('Error deleting image file:', error);
+      }
+    }
+
+    // Update database to set image field to null
+    return await this.downloadAppSectionRepository.update(id, {
+      [imageType]: null,
+    });
+  }
 }
 
 export default DownloadAppSectionService;

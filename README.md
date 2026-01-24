@@ -43,7 +43,7 @@ npm run seed:full
 - ✅ All page settings
 - ✅ Navbar & Footer
 
-**Login:** `admin@baitalshawarma.com` / `shawarma@admin123`
+**Login:** `admin@central.com` / `central@admin123`
 
 See `QUICK_SEED_GUIDE.md` for details!
 

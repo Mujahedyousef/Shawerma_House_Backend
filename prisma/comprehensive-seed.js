@@ -97,6 +97,9 @@ async function clearDatabase() {
   await prisma.aboutUsTeamMember.deleteMany({});
   await prisma.aboutUsAward.deleteMany({});
   await prisma.aboutUsPageSettings.deleteMany({});
+  await prisma.downloadAppSection.deleteMany({});
+  await prisma.branch.deleteMany({});
+  await prisma.branchesMapSection.deleteMany({});
   
   console.log('✅ Database cleared');
 }
@@ -104,8 +107,8 @@ async function clearDatabase() {
 async function seedAdmin() {
   console.log('👤 Seeding admin user...');
   
-  const adminEmail = 'admin@baitalshawarma.com';
-  const adminPassword = 'shawarma@admin123';
+  const adminEmail = 'admin@central.com';
+  const adminPassword = 'central@admin123';
   const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
   // Delete any existing admins to avoid conflicts
@@ -1362,6 +1365,144 @@ async function seedRequestTypes() {
   console.log('✅ Request Types seeded');
 }
 
+async function seedBranchesMap() {
+  console.log('🗺️  Seeding Branches Map Section...');
+  
+  const mapSection = await prisma.branchesMapSection.create({
+    data: {
+      sectionTitleEn: 'Visit Our Branches',
+      sectionTitleAr: 'زر فروعنا',
+      sectionSubtitleEn: 'Find us at any of our convenient locations across the UAE',
+      sectionSubtitleAr: 'اعثر علينا في أي من مواقعنا المريحة في جميع أنحاء الإمارات',
+      mapCenterLat: 25.2048,
+      mapCenterLng: 55.2708,
+      defaultZoomLevel: 11,
+      isActive: true,
+      branches: {
+        create: [
+          {
+            nameEn: 'Dubai Mall Branch',
+            nameAr: 'فرع دبي مول',
+            addressEn: 'Ground Floor, Dubai Mall, Downtown Dubai, Dubai',
+            addressAr: 'الطابق الأرضي، دبي مول، وسط مدينة دبي، دبي',
+            latitude: 25.1972,
+            longitude: 55.2744,
+            phoneNumber: '+971 4 123 4567',
+            email: 'dubaimall@shawarmahouse.ae',
+            workingHoursEn: 'Sunday - Thursday: 10:00 AM - 11:00 PM\nFriday - Saturday: 10:00 AM - 12:00 AM',
+            workingHoursAr: 'الأحد - الخميس: 10:00 صباحاً - 11:00 مساءً\nالجمعة - السبت: 10:00 صباحاً - 12:00 صباحاً',
+            order: 1,
+            isActive: true,
+          },
+          {
+            nameEn: 'Marina Walk Branch',
+            nameAr: 'فرع مارينا ووك',
+            addressEn: 'Shop 12, Marina Walk, Dubai Marina, Dubai',
+            addressAr: 'محل 12، مارينا ووك، دبي مارينا، دبي',
+            latitude: 25.0805,
+            longitude: 55.1385,
+            phoneNumber: '+971 4 234 5678',
+            email: 'marina@shawarmahouse.ae',
+            workingHoursEn: 'Daily: 11:00 AM - 12:00 AM',
+            workingHoursAr: 'يومياً: 11:00 صباحاً - 12:00 صباحاً',
+            order: 2,
+            isActive: true,
+          },
+          {
+            nameEn: 'Jumeirah Beach Branch',
+            nameAr: 'فرع شاطئ جميرا',
+            addressEn: 'Jumeirah Beach Residence, The Walk, Dubai',
+            addressAr: 'جميرا بيتش ريزيدنس، ذا ووك، دبي',
+            latitude: 25.0777,
+            longitude: 55.1315,
+            phoneNumber: '+971 4 345 6789',
+            email: 'jbr@shawarmahouse.ae',
+            workingHoursEn: 'Daily: 10:00 AM - 1:00 AM',
+            workingHoursAr: 'يومياً: 10:00 صباحاً - 1:00 صباحاً',
+            order: 3,
+            isActive: true,
+          },
+          {
+            nameEn: 'Business Bay Branch',
+            nameAr: 'فرع الخليج التجاري',
+            addressEn: 'Bay Square, Business Bay, Dubai',
+            addressAr: 'باي سكوير، الخليج التجاري، دبي',
+            latitude: 25.1868,
+            longitude: 55.2657,
+            phoneNumber: '+971 4 456 7890',
+            email: 'businessbay@shawarmahouse.ae',
+            workingHoursEn: 'Sunday - Thursday: 8:00 AM - 10:00 PM\nFriday - Saturday: 10:00 AM - 11:00 PM',
+            workingHoursAr: 'الأحد - الخميس: 8:00 صباحاً - 10:00 مساءً\nالجمعة - السبت: 10:00 صباحاً - 11:00 مساءً',
+            order: 4,
+            isActive: true,
+          },
+          {
+            nameEn: 'Silicon Oasis Branch',
+            nameAr: 'فرع واحة السيليكون',
+            addressEn: 'Dubai Silicon Oasis, Cedre Villas, Dubai',
+            addressAr: 'واحة السيليكون، سيدر فيلاز، دبي',
+            latitude: 25.1180,
+            longitude: 55.3796,
+            phoneNumber: '+971 4 567 8901',
+            email: 'siliconoasis@shawarmahouse.ae',
+            workingHoursEn: 'Daily: 9:00 AM - 11:00 PM',
+            workingHoursAr: 'يومياً: 9:00 صباحاً - 11:00 مساءً',
+            order: 5,
+            isActive: true,
+          },
+          {
+            nameEn: 'Al Barsha Branch',
+            nameAr: 'فرع البرشاء',
+            addressEn: 'Mall of the Emirates, Al Barsha, Dubai',
+            addressAr: 'مول الإمارات، البرشاء، دبي',
+            latitude: 25.1182,
+            longitude: 55.2005,
+            phoneNumber: '+971 4 678 9012',
+            email: 'albarsha@shawarmahouse.ae',
+            workingHoursEn: 'Daily: 10:00 AM - 11:00 PM',
+            workingHoursAr: 'يومياً: 10:00 صباحاً - 11:00 مساءً',
+            order: 6,
+            isActive: true,
+          },
+          {
+            nameEn: 'Deira City Centre Branch',
+            nameAr: 'فرع ديرة سيتي سنتر',
+            addressEn: 'Deira City Centre, Deira, Dubai',
+            addressAr: 'ديرة سيتي سنتر، ديرة، دبي',
+            latitude: 25.2524,
+            longitude: 55.3313,
+            phoneNumber: '+971 4 789 0123',
+            email: 'deira@shawarmahouse.ae',
+            workingHoursEn: 'Daily: 10:00 AM - 10:00 PM',
+            workingHoursAr: 'يومياً: 10:00 صباحاً - 10:00 مساءً',
+            order: 7,
+            isActive: true,
+          },
+          {
+            nameEn: 'Abu Dhabi Mall Branch',
+            nameAr: 'فرع مول أبوظبي',
+            addressEn: 'Abu Dhabi Mall, Tourist Club Area, Abu Dhabi',
+            addressAr: 'مول أبوظبي، منطقة النادي السياحي، أبوظبي',
+            latitude: 24.4909,
+            longitude: 54.3774,
+            phoneNumber: '+971 2 890 1234',
+            email: 'abudhabi@shawarmahouse.ae',
+            workingHoursEn: 'Daily: 10:00 AM - 11:00 PM',
+            workingHoursAr: 'يومياً: 10:00 صباحاً - 11:00 مساءً',
+            order: 8,
+            isActive: true,
+          },
+        ],
+      },
+    },
+    include: {
+      branches: true,
+    },
+  });
+  
+  console.log(`✅ Branches Map Section created with ${mapSection.branches.length} branches`);
+}
+
 async function main() {
   // Prevent duplicate runs
   if (isRunning) {
@@ -1392,11 +1533,12 @@ async function main() {
     await seedAboutUs();
     await seedArticles();
     await seedRequestTypes();
+    await seedBranchesMap();
     
     console.log('\n🎉 ALL DATA SEEDED SUCCESSFULLY! 🎉\n');
     console.log('📧 Admin Login:');
-    console.log('   Email: admin@baitalshawarma.com');
-    console.log('   Password: shawarma@admin123\n');
+    console.log('   Email: admin@central.com');
+    console.log('   Password: central@admin123\n');
     console.log('📊 Seeded Data Summary:');
     console.log('   ✅ Hero Section with media & stats');
     console.log('   ✅ 10 Product Categories');
@@ -1411,7 +1553,8 @@ async function main() {
     console.log('   ✅ Careers page with jobs');
     console.log('   ✅ About Us page complete');
     console.log('   ✅ Navbar & Footer');
-    console.log('   ✅ All page settings\n');
+    console.log('   ✅ All page settings');
+    console.log('   ✅ Branches Map with 8 locations\n');
   } catch (error) {
     console.error('❌ Seeding failed:', error);
     throw error;

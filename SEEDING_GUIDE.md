@@ -52,8 +52,8 @@ The comprehensive seed script (`comprehensive-seed.js`) creates realistic data f
 - **Request Types**: Contact form request types
 
 ### 👤 Admin User
-- **Email**: `admin@baitalshawarma.com`
-- **Password**: `shawarma@admin123`
+- **Email**: `admin@central.com`
+- **Password**: `central@admin123`
 
 ## How to Run the Seed Script
 
@@ -126,8 +126,8 @@ node prisma/comprehensive-seed.js
 🎉 ALL DATA SEEDED SUCCESSFULLY! 🎉
 
 📧 Admin Login:
-   Email: admin@baitalshawarma.com
-   Password: shawarma@admin123
+   Email: admin@central.com
+   Password: central@admin123
 
 📊 Seeded Data Summary:
    ✅ Hero Section with media & stats
