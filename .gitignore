@@ -32,3 +32,8 @@ Thumbs.db
 dist/
 build/
 
+
+# Ignore all files in uploads except .gitkeep
+public/uploads/*
+!public/uploads/.gitkeep
+!public/uploads/placeholder.svg
