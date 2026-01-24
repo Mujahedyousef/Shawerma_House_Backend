@@ -266,24 +266,32 @@ model BrandLogo {
 }
 
 model DownloadAppSection {
-  id                     String   @id @default(uuid())
-  titleEn                String   @default("Download Shawarma House App Now!")
-  titleAr                String   @default("حمّل تطبيق بيت الشاورما الآن!")
-  descriptionEn          String   @default("Try your favorite food easier with Shawarma House app! Order, track, and enjoy exclusive offers from the nearest branch, all in simple steps from your phone.")
-  descriptionAr          String   @default("جرّب طعامك المفضل بطريقة أسهل مع تطبيق بيت الشاورما! اطلب، تابع، واستمتع بعروض حصرية من أقرب فرع لك، وكل هذا بخطوات بسيطة من جوالك.")
-  backgroundImageUrl     String?
-  backgroundColor        String   @default("#1a1a1a")
-  theme                  String   @default("dark")
-  appStoreImageUrl       String?
-  appStoreLink           String?
-  googlePlayImageUrl     String?
-  googlePlayLink         String?
-  mobileAppImageUrl      String?
-  enableInitialAnimation Boolean  @default(true)
-  enableScrollAnimation  Boolean  @default(true)
-  isActive               Boolean  @default(true)
-  createdAt              DateTime @default(now())
-  updatedAt              DateTime @updatedAt
+  id                        String   @id @default(uuid())
+  titleEn                   String   @default("Download Shawarma House App Now!")
+  titleAr                   String   @default("حمّل تطبيق بيت الشاورما الآن!")
+  descriptionEn             String   @default("Try your favorite food easier with Shawarma House app! Order, track, and enjoy exclusive offers from the nearest branch, all in simple steps from your phone.")
+  descriptionAr             String   @default("جرّب طعامك المفضل بطريقة أسهل مع تطبيق بيت الشاورما! اطلب، تابع، واستمتع بعروض حصرية من أقرب فرع لك، وكل هذا بخطوات بسيطة من جوالك.")
+  backgroundImageUrl        String?
+  // Light Mode Colors
+  backgroundColorLight      String   @default("#ffffff")
+  titleColorLight           String   @default("#1a1a1a")
+  descriptionColorLight     String   @default("#666666")
+  // Dark Mode Colors
+  backgroundColorDark       String   @default("#1a1a1a")
+  titleColorDark            String   @default("#ffffff")
+  descriptionColorDark      String   @default("#cccccc")
+  // Images and Links
+  appStoreImageUrl          String?
+  appStoreLink              String?
+  googlePlayImageUrl        String?
+  googlePlayLink            String?
+  mobileAppImageUrl         String?
+  // Animation Settings
+  enableInitialAnimation    Boolean  @default(true)
+  enableScrollAnimation     Boolean  @default(true)
+  isActive                  Boolean  @default(true)
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
 
   @@map("download_app_sections")
 }
@@ -1157,4 +1165,57 @@ model AboutUsAward {
   aboutUsPage   AboutUsPageSettings @relation(fields: [aboutUsPageId], references: [id], onDelete: Cascade)
 
   @@map("about_us_awards")
+}
+
+model BranchesMapSection {
+  id                      String   @id @default(uuid())
+  sectionTitleEn          String   @default("Visit Our Branches")
+  sectionTitleAr          String   @default("زر فروعنا")
+  sectionSubtitleEn       String?  @default("Find us at any of our convenient locations")
+  sectionSubtitleAr       String?  @default("اعثر علينا في أي من مواقعنا المريحة")
+  mapCenterLat            Float    @default(24.7136) // Riyadh, Saudi Arabia
+  mapCenterLng            Float    @default(46.6753)
+  defaultZoomLevel        Int      @default(12)
+  // Styling - Applied to all branch cards
+  borderRadius            Int?     @default(12) // in pixels, optional
+  // Light Mode Colors
+  cardBackgroundLight     String   @default("#ffffff")
+  cardTextLight           String   @default("#1a1a1a")
+  cardAccentLight         String   @default("#3daae1")
+  pinColorLight           String   @default("#3daae1")
+  // Dark Mode Colors
+  cardBackgroundDark      String   @default("#2a2a2a")
+  cardTextDark            String   @default("#ffffff")
+  cardAccentDark          String   @default("#3daae1")
+  pinColorDark            String   @default("#3daae1")
+  // Status
+  isActive                Boolean  @default(true)
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  branches                Branch[]
+
+  @@map("branches_map_sections")
+}
+
+model Branch {
+  id             String             @id @default(uuid())
+  nameEn         String
+  nameAr         String
+  addressEn      String
+  addressAr      String
+  latitude       Float
+  longitude      Float
+  googleMapsLink String?            // Optional: Custom Google Maps link instead of auto-generated from lat/lng
+  phoneNumber    String
+  email          String
+  workingHoursEn String             // Flexible text field for any custom hours
+  workingHoursAr String             // Flexible text field for any custom hours
+  order          Int                @default(0)
+  isActive       Boolean            @default(true)
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  mapSectionId   String
+  mapSection     BranchesMapSection @relation(fields: [mapSectionId], references: [id], onDelete: Cascade)
+
+  @@map("branches")
 }
