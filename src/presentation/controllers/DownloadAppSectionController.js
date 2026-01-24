@@ -35,8 +35,12 @@ export class DownloadAppSectionController {
         titleAr: req.body.titleAr,
         descriptionEn: req.body.descriptionEn,
         descriptionAr: req.body.descriptionAr,
-        backgroundColor: req.body.backgroundColor || '#1a1a1a',
-        theme: req.body.theme || 'dark',
+        backgroundColorLight: req.body.backgroundColorLight || '#ffffff',
+        titleColorLight: req.body.titleColorLight || '#1a1a1a',
+        descriptionColorLight: req.body.descriptionColorLight || '#666666',
+        backgroundColorDark: req.body.backgroundColorDark || '#1a1a1a',
+        titleColorDark: req.body.titleColorDark || '#ffffff',
+        descriptionColorDark: req.body.descriptionColorDark || '#cccccc',
         appStoreLink: req.body.appStoreLink || null,
         googlePlayLink: req.body.googlePlayLink || null,
         enableInitialAnimation: req.body.enableInitialAnimation === 'true' || req.body.enableInitialAnimation === true,
@@ -63,8 +67,12 @@ export class DownloadAppSectionController {
       if (req.body.titleAr !== undefined) updateData.titleAr = req.body.titleAr;
       if (req.body.descriptionEn !== undefined) updateData.descriptionEn = req.body.descriptionEn;
       if (req.body.descriptionAr !== undefined) updateData.descriptionAr = req.body.descriptionAr;
-      if (req.body.backgroundColor !== undefined) updateData.backgroundColor = req.body.backgroundColor;
-      if (req.body.theme !== undefined) updateData.theme = req.body.theme;
+      if (req.body.backgroundColorLight !== undefined) updateData.backgroundColorLight = req.body.backgroundColorLight;
+      if (req.body.titleColorLight !== undefined) updateData.titleColorLight = req.body.titleColorLight;
+      if (req.body.descriptionColorLight !== undefined) updateData.descriptionColorLight = req.body.descriptionColorLight;
+      if (req.body.backgroundColorDark !== undefined) updateData.backgroundColorDark = req.body.backgroundColorDark;
+      if (req.body.titleColorDark !== undefined) updateData.titleColorDark = req.body.titleColorDark;
+      if (req.body.descriptionColorDark !== undefined) updateData.descriptionColorDark = req.body.descriptionColorDark;
       if (req.body.appStoreLink !== undefined) updateData.appStoreLink = req.body.appStoreLink || null;
       if (req.body.googlePlayLink !== undefined) updateData.googlePlayLink = req.body.googlePlayLink || null;
       if (req.body.enableInitialAnimation !== undefined) {
@@ -125,6 +133,29 @@ export class DownloadAppSectionController {
 
       res.status(200).json({
         success: true,
+        data: section,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  deleteImage = async (req, res, next) => {
+    try {
+      const { id, imageType } = req.params;
+
+      if (!['backgroundImageUrl', 'appStoreImageUrl', 'googlePlayImageUrl', 'mobileAppImageUrl'].includes(imageType)) {
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid image type',
+        });
+      }
+
+      const section = await this.downloadAppSectionService.deleteImage(id, imageType);
+
+      res.status(200).json({
+        success: true,
+        message: 'Image deleted successfully',
         data: section,
       });
     } catch (error) {
