@@ -22,11 +22,39 @@ app.use(
 );
 
 // CORS configuration
-// In development, allow all origins; in production, use specific origin
+// Parse comma-separated origins and validate incoming requests
+const getAllowedOrigins = () => {
+  const corsOrigin = config.cors.origin;
+  
+  // If it contains comma, split into array
+  if (corsOrigin.includes(',')) {
+    return corsOrigin.split(',').map(origin => origin.trim());
+  }
+  
+  return [corsOrigin]; // Always return as array
+};
+
 const corsOptions = {
-  origin: config.env === 'development' 
-    ? true // Allow all origins in development
-    : config.cors.origin || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, curl, Postman)
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    const allowedOrigins = getAllowedOrigins();
+    
+    // In development, allow all origins
+    if (config.env === 'development') {
+      return callback(null, true);
+    }
+    
+    // In production, check if origin is in allowed list
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`Origin ${origin} not allowed by CORS`));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
