@@ -37,7 +37,7 @@ lsof -i :5000
 
 If something is using port 5000, either:
 - Stop that process
-- Change PORT in `.env` to another port (e.g., 5001)
+- Change PORT in `.env` to another port (e.g., 3001)
 
 ### Step 4: Install dependencies
 
