@@ -54,11 +54,11 @@ npm run prisma:seed
 **Login:** `admin@central.com` / `central@admin123`
 
 ## API Endpoint
-Server runs on: `http://localhost:5001`
+Server runs on: `http://localhost:3001`
 
 **Note:** Port 5000 is often used by macOS system services. If you need to use port 5000, either:
-- Update your frontend to use `http://localhost:5001`
-- Or change `PORT=5001` to `PORT=5000` in `.env` (may conflict with system services)
+- Update your frontend to use `http://localhost:3001`
+- Or change `PORT=3001` to `PORT=5000` in `.env` (may conflict with system services)
 
 ## Environment Variables
 Edit `.env` file if you need to change:
@@ -67,4 +67,4 @@ Edit `.env` file if you need to change:
 - JWT secret
 
 # Kill the port:
-`lsof -ti:5001 | xargs kill -9`
+`lsof -ti:3001 | xargs kill -9`
