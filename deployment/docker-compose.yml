@@ -1,0 +1,89 @@
+version: '3.8'
+
+# Run from: /var/www/shawarma-home/Shawerma_House_Backend/deployment/
+# Command: docker compose up -d --build
+
+services:
+  database:
+    image: postgres:16-alpine
+    container_name: shawarma-db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME:-shawarma_db}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - shawarma-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    container_name: shawarma-backend
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@database:5432/${DB_NAME:-shawarma_db}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: 7d
+      CORS_ORIGIN: ${CORS_ORIGIN}
+    depends_on:
+      database:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:3001:3001"
+    networks:
+      - shawarma-network
+    volumes:
+      - backend_uploads:/app/public/uploads
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ../../Shawerma_House_FrontEnd
+      dockerfile: Dockerfile
+    container_name: shawarma-frontend
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      API_URL: http://backend:3001/api
+      NEXT_PUBLIC_API_URL: ${PUBLIC_API_URL}
+    depends_on:
+      - backend
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks:
+      - shawarma-network
+    restart: unless-stopped
+
+  cms:
+    build:
+      context: ../../Shawerma_House_cms
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${PUBLIC_API_URL}
+    container_name: shawarma-cms
+    ports:
+      - "127.0.0.1:3002:80"
+    networks:
+      - shawarma-network
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+  backend_uploads:
+    driver: local
+
+networks:
+  shawarma-network:
+    driver: bridge
