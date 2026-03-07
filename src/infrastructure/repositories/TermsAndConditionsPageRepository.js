@@ -18,7 +18,7 @@ export class TermsAndConditionsPageRepository extends ITermsAndConditionsPageRep
           titleAr: 'الشروط والأحكام',
           descriptionEn: 'Terms and conditions may be updated from time to time',
           descriptionAr: 'يمكن أن يتم تحديث الشروط والأحكام من فترة لأخرى',
-          contentEn: '<p>Welcome to the Central Jordanian website. Please read these terms and conditions carefully before using the website.</p>',
+          contentEn: '<p>Welcome to the Shawarma House website. Please read these terms and conditions carefully before using the website.</p>',
           contentAr: '<p>مرحبا بكم في موقع المركزية الأردنية. يرجى قراءة هذه الشروط والقوانين بعناية قبل استخدام الموقع.</p>',
           isActive: true,
         },

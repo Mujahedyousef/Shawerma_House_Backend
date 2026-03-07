@@ -19,7 +19,7 @@ export class NavbarRepository extends INavbarRepository {
     if (!settings) {
       settings = await prisma.navbarSettings.create({
         data: {
-          logoUrl: '/uploads/default-logo.svg',
+          logoUrl: '/uploads/default-logo.png',
           isActive: true,
         },
         include: {
@@ -52,7 +52,7 @@ export class NavbarRepository extends INavbarRepository {
     } else {
       return await prisma.navbarSettings.create({
         data: {
-          logoUrl: data.logoUrl || '/uploads/default-logo.svg',
+          logoUrl: data.logoUrl || '/uploads/default-logo.png',
           isActive: true,
         },
         include: {
@@ -83,7 +83,7 @@ export class NavbarRepository extends INavbarRepository {
     if (!settings) {
       settings = await prisma.navbarSettings.create({
         data: {
-          logoUrl: '/uploads/default-logo.svg',
+          logoUrl: '/uploads/default-logo.png',
           isActive: true,
         },
       });

@@ -955,8 +955,8 @@ model FooterSettings {
   newsletterEmailPlaceholderAr String        @default("البريد الإلكتروني")
   newsletterButtonTextEn       String        @default("Send")
   newsletterButtonTextAr       String        @default("إرسال")
-  copyrightTextEn              String        @default("© 2024 Central Jordan. All rights reserved.")
-  copyrightTextAr              String        @default("© 2024 Central Jordan. جميع الحقوق محفوظة.")
+  copyrightTextEn              String        @default("© 2024 Shawarma House. All rights reserved.")
+  copyrightTextAr              String        @default("© 2024 Shawarma House. جميع الحقوق محفوظة.")
   isActive                     Boolean       @default(true)
   createdAt                    DateTime      @default(now())
   updatedAt                    DateTime      @updatedAt

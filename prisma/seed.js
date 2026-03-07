@@ -7,8 +7,8 @@ async function main() {
   console.log('🌱 Seeding database...');
 
   // Create admin user
-  const adminEmail = 'admin@central.com';
-  const adminPassword = 'central@admin123';
+  const adminEmail = 'admin@shawermahouse.com';
+  const adminPassword = 'shawermahouse@admin123';
   const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
   // Check if admin user already exists

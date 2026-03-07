@@ -1,26 +1,33 @@
 import { AuthService } from '../application/services/AuthService.js';
+import { cookieConfig } from '../config/cookie.js';
 
 /**
  * Authentication Middleware
- * Verifies JWT token and attaches user info to request
+ * Reads token from HttpOnly cookie (or Authorization header for backward compatibility).
+ * Verifies JWT and attaches user info to request.
  */
 export const authenticate = async (req, res, next) => {
   try {
-    const authHeader = req.headers.authorization;
+    // Prefer cookie over Authorization header (cookie is primary for browser clients)
+    let token = req.cookies?.[cookieConfig.name];
 
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    if (!token) {
+      const authHeader = req.headers.authorization;
+      if (authHeader?.startsWith('Bearer ')) {
+        token = authHeader.substring(7);
+      }
+    }
+
+    if (!token) {
       return res.status(401).json({
         success: false,
         message: 'No token provided',
       });
     }
 
-    const token = authHeader.substring(7); // Remove 'Bearer ' prefix
-
     const authService = new AuthService();
     const decoded = await authService.verifyToken(token);
 
-    // Attach user info to request
     req.user = decoded;
 
     next();

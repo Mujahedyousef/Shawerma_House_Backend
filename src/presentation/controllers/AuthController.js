@@ -1,17 +1,22 @@
 import { AuthService } from '../../application/services/AuthService.js';
+import { UserRepository } from '../../infrastructure/repositories/UserRepository.js';
+import { cookieConfig } from '../../config/cookie.js';
 
 /**
  * Authentication Controller
- * Handles login and authentication-related requests
+ * Handles login and authentication-related requests.
+ * Uses HttpOnly cookies for secure token storage (XSS protection).
  */
 export class AuthController {
   constructor() {
     this.authService = new AuthService();
+    this.userRepository = new UserRepository();
   }
 
   /**
    * Login handler
    * POST /api/auth/login
+   * Sets HttpOnly cookie - token is never exposed to client JS.
    */
   async login(req, res, next) {
     try {
@@ -26,10 +31,14 @@ export class AuthController {
 
       const result = await this.authService.login(emailOrUsername, password);
 
+      // Set HttpOnly cookie instead of returning token in response body
+      res.cookie(cookieConfig.name, result.token, cookieConfig.options);
+
+      // Return user data only - token is in cookie, never exposed to JS
       return res.status(200).json({
         success: true,
         message: 'Login successful',
-        data: result,
+        data: { user: result.user },
       });
     } catch (error) {
       return res.status(401).json({
@@ -42,17 +51,21 @@ export class AuthController {
   /**
    * Get current user info
    * GET /api/auth/me
+   * Returns full user (excluding password) for UI display.
    */
   async getCurrentUser(req, res, next) {
     try {
-      // User info is attached by authMiddleware
+      const rawUser = await this.userRepository.findRawByEmailOrUsername(req.user.email);
+      if (!rawUser) {
+        return res.status(404).json({
+          success: false,
+          message: 'User not found',
+        });
+      }
+      const { password: _, ...userWithoutPassword } = rawUser;
       return res.status(200).json({
         success: true,
-        data: {
-          userId: req.user.userId,
-          email: req.user.email,
-          role: req.user.role,
-        },
+        data: { user: userWithoutPassword },
       });
     } catch (error) {
       return res.status(500).json({
@@ -63,13 +76,18 @@ export class AuthController {
   }
 
   /**
-   * Logout handler (client-side token removal, but we can invalidate if needed)
+   * Logout handler
    * POST /api/auth/logout
+   * Clears the auth cookie. Public route - works even with expired token.
    */
   async logout(req, res, next) {
     try {
-      // For JWT, logout is handled client-side by removing the token
-      // If you want server-side invalidation, you'd need a token blacklist
+      res.clearCookie(cookieConfig.name, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        path: '/',
+      });
       return res.status(200).json({
         success: true,
         message: 'Logout successful',

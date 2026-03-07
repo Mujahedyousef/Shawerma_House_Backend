@@ -39,8 +39,8 @@ export class FooterRepository extends IFooterRepository {
           newsletterEmailPlaceholderAr: 'البريد الإلكتروني',
           newsletterButtonTextEn: 'Send',
           newsletterButtonTextAr: 'إرسال',
-          copyrightTextEn: '© 2024 Central Jordan. All rights reserved.',
-          copyrightTextAr: '© 2024 Central Jordan. جميع الحقوق محفوظة.',
+          copyrightTextEn: '© 2024 Shawarma House. All rights reserved.',
+          copyrightTextAr: '© 2024 Shawarma House. جميع الحقوق محفوظة.',
           isActive: true,
         },
         include: {
@@ -112,8 +112,8 @@ export class FooterRepository extends IFooterRepository {
           newsletterEmailPlaceholderAr: data.newsletterEmailPlaceholderAr || 'البريد الإلكتروني',
           newsletterButtonTextEn: data.newsletterButtonTextEn || 'Send',
           newsletterButtonTextAr: data.newsletterButtonTextAr || 'إرسال',
-          copyrightTextEn: data.copyrightTextEn || '© 2024 Central Jordan. All rights reserved.',
-          copyrightTextAr: data.copyrightTextAr || '© 2024 Central Jordan. جميع الحقوق محفوظة.',
+          copyrightTextEn: data.copyrightTextEn || '© 2024 Shawarma House. All rights reserved.',
+          copyrightTextAr: data.copyrightTextAr || '© 2024 Shawarma House. جميع الحقوق محفوظة.',
           isActive: true,
         },
         include: {
@@ -161,8 +161,8 @@ export class FooterRepository extends IFooterRepository {
           newsletterEmailPlaceholderAr: 'البريد الإلكتروني',
           newsletterButtonTextEn: 'Send',
           newsletterButtonTextAr: 'إرسال',
-          copyrightTextEn: '© 2024 Central Jordan. All rights reserved.',
-          copyrightTextAr: '© 2024 Central Jordan. جميع الحقوق محفوظة.',
+          copyrightTextEn: '© 2024 Shawarma House. All rights reserved.',
+          copyrightTextAr: '© 2024 Shawarma House. جميع الحقوق محفوظة.',
           isActive: true,
         },
       });
@@ -229,8 +229,8 @@ export class FooterRepository extends IFooterRepository {
           newsletterEmailPlaceholderAr: 'البريد الإلكتروني',
           newsletterButtonTextEn: 'Send',
           newsletterButtonTextAr: 'إرسال',
-          copyrightTextEn: '© 2024 Central Jordan. All rights reserved.',
-          copyrightTextAr: '© 2024 Central Jordan. جميع الحقوق محفوظة.',
+          copyrightTextEn: '© 2024 Shawarma House. All rights reserved.',
+          copyrightTextAr: '© 2024 Shawarma House. جميع الحقوق محفوظة.',
           isActive: true,
         },
       });

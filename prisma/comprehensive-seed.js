@@ -107,8 +107,8 @@ async function clearDatabase() {
 async function seedAdmin() {
   console.log('👤 Seeding admin user...');
   
-  const adminEmail = 'admin@central.com';
-  const adminPassword = 'central@admin123';
+  const adminEmail = 'admin@shawermahouse.com';
+  const adminPassword = 'shawermahouse@admin123';
   const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
   // Delete any existing admins to avoid conflicts
@@ -431,7 +431,7 @@ async function seedProjects() {
       heroImageUrl: getImage(5),
       productsCount: 45,
       specifications: [
-        { keyEn: 'Location', keyAr: 'الموقع', valueEn: 'Dubai, UAE', valueAr: 'دبي، الإمارات' },
+        { keyEn: 'Location', keyAr: 'الموقع', valueEn: 'Dubai, UAE', valueAr: 'الرياض، الإمارات' },
         { keyEn: 'Completion', keyAr: 'التسليم', valueEn: '2023', valueAr: '2023' },
         { keyEn: 'Size', keyAr: 'المساحة', valueEn: '250 sqm', valueAr: '250 متر مربع' },
       ],
@@ -659,7 +659,7 @@ async function seedPages() {
       workingHoursEn: 'Sunday - Thursday: 8:00 AM - 6:00 PM',
       workingHoursAr: 'الأحد - الخميس: 8:00 صباحاً - 6:00 مساءً',
       locationEn: 'Dubai, United Arab Emirates',
-      locationAr: 'دبي، الإمارات العربية المتحدة',
+      locationAr: 'الرياض، الإمارات العربية المتحدة',
       mapLatitude: 25.2048,
       mapLongitude: 55.2708,
       isActive: true,
@@ -1212,7 +1212,7 @@ async function seedCareers() {
             requiredExperienceEn: '3-5 years',
             requiredExperienceAr: '3-5 سنوات',
             locationEn: 'Dubai, UAE',
-            locationAr: 'دبي، الإمارات',
+            locationAr: 'الرياض، الإمارات',
             jobTypeEn: 'Full-time',
             jobTypeAr: 'دوام كامل',
             descriptionEn: '<p>We are looking for an experienced sales manager...</p>',
@@ -1270,7 +1270,7 @@ async function seedAboutUs() {
             titleEn: 'Company Founded',
             titleAr: 'تأسيس الشركة',
             descriptionEn: 'Started our journey in Dubai',
-            descriptionAr: 'بدأنا رحلتنا في دبي',
+            descriptionAr: 'بدأنا رحلتنا في الرياض',
             order: 0,
           },
           {
@@ -1382,9 +1382,9 @@ async function seedBranchesMap() {
         create: [
           {
             nameEn: 'Dubai Mall Branch',
-            nameAr: 'فرع دبي مول',
+            nameAr: 'فرع الرياض مول',
             addressEn: 'Ground Floor, Dubai Mall, Downtown Dubai, Dubai',
-            addressAr: 'الطابق الأرضي، دبي مول، وسط مدينة دبي، دبي',
+            addressAr: 'الطابق الأرضي، الرياض مول، وسط مدينة الرياض، الرياض',
             latitude: 25.1972,
             longitude: 55.2744,
             phoneNumber: '+971 4 123 4567',
@@ -1398,7 +1398,7 @@ async function seedBranchesMap() {
             nameEn: 'Marina Walk Branch',
             nameAr: 'فرع مارينا ووك',
             addressEn: 'Shop 12, Marina Walk, Dubai Marina, Dubai',
-            addressAr: 'محل 12، مارينا ووك، دبي مارينا، دبي',
+            addressAr: 'محل 12، مارينا ووك، الرياض مارينا، الرياض',
             latitude: 25.0805,
             longitude: 55.1385,
             phoneNumber: '+971 4 234 5678',
@@ -1412,7 +1412,7 @@ async function seedBranchesMap() {
             nameEn: 'Jumeirah Beach Branch',
             nameAr: 'فرع شاطئ جميرا',
             addressEn: 'Jumeirah Beach Residence, The Walk, Dubai',
-            addressAr: 'جميرا بيتش ريزيدنس، ذا ووك، دبي',
+            addressAr: 'جميرا بيتش ريزيدنس، ذا ووك، الرياض',
             latitude: 25.0777,
             longitude: 55.1315,
             phoneNumber: '+971 4 345 6789',
@@ -1426,7 +1426,7 @@ async function seedBranchesMap() {
             nameEn: 'Business Bay Branch',
             nameAr: 'فرع الخليج التجاري',
             addressEn: 'Bay Square, Business Bay, Dubai',
-            addressAr: 'باي سكوير، الخليج التجاري، دبي',
+            addressAr: 'باي سكوير، الخليج التجاري، الرياض',
             latitude: 25.1868,
             longitude: 55.2657,
             phoneNumber: '+971 4 456 7890',
@@ -1440,7 +1440,7 @@ async function seedBranchesMap() {
             nameEn: 'Silicon Oasis Branch',
             nameAr: 'فرع واحة السيليكون',
             addressEn: 'Dubai Silicon Oasis, Cedre Villas, Dubai',
-            addressAr: 'واحة السيليكون، سيدر فيلاز، دبي',
+            addressAr: 'واحة السيليكون، سيدر فيلاز، الرياض',
             latitude: 25.1180,
             longitude: 55.3796,
             phoneNumber: '+971 4 567 8901',
@@ -1454,7 +1454,7 @@ async function seedBranchesMap() {
             nameEn: 'Al Barsha Branch',
             nameAr: 'فرع البرشاء',
             addressEn: 'Mall of the Emirates, Al Barsha, Dubai',
-            addressAr: 'مول الإمارات، البرشاء، دبي',
+            addressAr: 'مول الإمارات، البرشاء، الرياض',
             latitude: 25.1182,
             longitude: 55.2005,
             phoneNumber: '+971 4 678 9012',
@@ -1468,7 +1468,7 @@ async function seedBranchesMap() {
             nameEn: 'Deira City Centre Branch',
             nameAr: 'فرع ديرة سيتي سنتر',
             addressEn: 'Deira City Centre, Deira, Dubai',
-            addressAr: 'ديرة سيتي سنتر، ديرة، دبي',
+            addressAr: 'ديرة سيتي سنتر، ديرة، الرياض',
             latitude: 25.2524,
             longitude: 55.3313,
             phoneNumber: '+971 4 789 0123',
@@ -1537,8 +1537,8 @@ async function main() {
     
     console.log('\n🎉 ALL DATA SEEDED SUCCESSFULLY! 🎉\n');
     console.log('📧 Admin Login:');
-    console.log('   Email: admin@central.com');
-    console.log('   Password: central@admin123\n');
+    console.log('   Email: admin@shawermahouse.com');
+    console.log('   Password: shawermahouse@admin123\n');
     console.log('📊 Seeded Data Summary:');
     console.log('   ✅ Hero Section with media & stats');
     console.log('   ✅ 10 Product Categories');

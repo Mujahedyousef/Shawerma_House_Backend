@@ -10,7 +10,7 @@
 
 ```env
 # Database
-DATABASE_URL="postgresql://user:password@localhost:5432/central_jordan?schema=public"
+DATABASE_URL="postgresql://user:password@localhost:5432/sh?schema=public"
 
 # Server
 PORT=5000

@@ -11,7 +11,7 @@ router.post('/login', authController.login.bind(authController));
 // Get current user (protected)
 router.get('/me', authenticate, authController.getCurrentUser.bind(authController));
 
-// Logout route (protected)
-router.post('/logout', authenticate, authController.logout.bind(authController));
+// Logout route (public - clears cookie even with expired token)
+router.post('/logout', authController.logout.bind(authController));
 
 export default router;

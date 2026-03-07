@@ -1,8 +1,8 @@
 {
-  "name": "central-jordan-backend",
+  "name": "shawarma-house-backend",
   "version": "1.0.0",
   "type": "module",
-  "description": "Central Jordan Backend API",
+  "description": "Shawarma House Backend API",
   "main": "src/server.js",
   "scripts": {
     "dev": "node --watch src/server.js",
@@ -20,6 +20,7 @@
   "dependencies": {
     "@prisma/client": "^5.20.0",
     "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",

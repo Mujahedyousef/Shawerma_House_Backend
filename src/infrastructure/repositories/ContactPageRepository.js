@@ -19,7 +19,7 @@ export class ContactPageRepository extends IContactPageRepository {
           descriptionEn: 'We\'d love to hear from you. Send us a message and we\'ll respond as soon as possible.',
           descriptionAr: 'نود أن نسمع منك. أرسل لنا رسالة وسنرد في أقرب وقت ممكن.',
           phoneNumber: '+962 6 123 4567',
-          email: 'info@centraljordan.com',
+          email: 'info@shawermahouse.com',
           workingHoursEn: 'Sunday - Thursday: 8:00 AM - 5:00 PM',
           workingHoursAr: 'الأحد - الخميس: 8:00 صباحاً - 5:00 مساءً',
           locationEn: 'Amman, Jordan',

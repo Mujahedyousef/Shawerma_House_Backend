@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import path from 'path';
@@ -62,6 +63,9 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+// Cookie parsing middleware (required for HttpOnly auth cookies)
+app.use(cookieParser());
 
 // Body parsing middleware
 app.use(express.json());
